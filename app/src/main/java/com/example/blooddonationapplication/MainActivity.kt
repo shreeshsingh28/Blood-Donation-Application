@@ -4,18 +4,30 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var btn1 = findViewById<Button>(R.id.btn1)
+        val email = intent.getStringExtra("user")
+        val username = findViewById<TextView>(R.id.userTV1)
+        username.text = email.toString()
 
-        btn1.setOnClickListener {
+        var logoutbtn = findViewById<Button>(R.id.logoutbtn)
+        logoutbtn.setOnClickListener {
             val intent = Intent(this, LoginPage::class.java)
             startActivity(intent)
         }
+
+        var profile = findViewById<Button>(R.id.profilebtn)
+        profile.setOnClickListener {
+            val intent = Intent(this, Profile::class.java)
+            intent.putExtra("user", username.text.toString())
+            startActivity(intent)
+        }
+
 
     }
 }

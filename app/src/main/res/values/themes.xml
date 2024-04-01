@@ -6,4 +6,13 @@
     </style>
 
     <style name="Theme.BloodDonationApplication" parent="Base.Theme.BloodDonationApplication" />
+
+    <style name="Theme.BloodDonationApplication.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.BloodDonationApplication.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.BloodDonationApplication.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
