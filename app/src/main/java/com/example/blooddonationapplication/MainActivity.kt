@@ -28,6 +28,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        var history = findViewById<Button>(R.id.historybtn)
+        history.setOnClickListener {
+            val intent = Intent(this, History::class.java)
+            intent.putExtra("user", username.text.toString())
+            startActivity(intent)
+        }
+
 
     }
 }
