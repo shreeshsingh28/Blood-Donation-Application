@@ -42,6 +42,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        var don = findViewById<Button>(R.id.donatebtn)
+        don.setOnClickListener {
+            val intent = Intent(this, Donate::class.java)
+            intent.putExtra("user", username.text.toString())
+            startActivity(intent)
+        }
+
 
     }
 }

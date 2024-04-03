@@ -39,17 +39,28 @@ class Profile : AppCompatActivity() {
 
         val updatebtn = findViewById<Button>(R.id.updatebtn)
         updatebtn.setOnClickListener {
-            val user = User(
-                username = email.toString(),
-                firstName = fn.text.toString(),
-                lastName = ln.text.toString(),
-                sex = sex.text.toString(),
-                bloodGroup = bg.text.toString(),
-                mobileNo = mob.text.toString(),
-                city = city.text.toString(),
-                state = state.text.toString()
-            )
-            addUserToFirestore(user)
+            val username = email.toString()
+            val firstName = fn.text.toString()
+            val lastName = ln.text.toString()
+            val sex = sex.text.toString()
+            val bloodGroup = bg.text.toString()
+            val mobileNo = mob.text.toString()
+            val city = city.text.toString()
+            val state = state.text.toString()
+
+            if (validateInputs(username, firstName, lastName, sex, bloodGroup, mobileNo)) {
+                val user = User(
+                    username = username,
+                    firstName = firstName,
+                    lastName = lastName,
+                    sex = sex,
+                    bloodGroup = bloodGroup,
+                    mobileNo = mobileNo,
+                    city = city,
+                    state = state
+                )
+                addUserToFirestore(user)
+            }
         }
 
 
@@ -94,6 +105,38 @@ class Profile : AppCompatActivity() {
 
 
 
+    }
+
+    private fun validateInputs(username: String, firstName: String, lastName: String, sex: String, bloodGroup: String, mobileNo: String): Boolean {
+        // Validate sex
+        if (!isValidSex(sex)) {
+            showToast("Invalid sex. Please enter male, female, or others.")
+            return false
+        }
+
+        // Validate blood group
+        if (!isValidBloodGroup(bloodGroup)) {
+            showToast("Invalid blood group. Please enter a valid blood group.")
+            return false
+        }
+
+        // Validate mobile number length
+        if (mobileNo.length != 10) {
+            showToast("Mobile number should be 10 digits long.")
+            return false
+        }
+
+        // All validations passed
+        return true
+    }
+
+    private fun isValidSex(sex: String): Boolean {
+        return sex.equals("male", ignoreCase = true) || sex.equals("female", ignoreCase = true) || sex.equals("others", ignoreCase = true)
+    }
+
+    private fun isValidBloodGroup(bloodGroup: String): Boolean {
+        val validBloodGroups = arrayOf("O+", "A+", "B+", "AB+", "O-", "A-", "B-", "AB-")
+        return validBloodGroups.contains(bloodGroup.toUpperCase())
     }
 
     private fun showToast(message: String) {
