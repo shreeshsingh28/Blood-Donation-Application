@@ -35,6 +35,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        var req = findViewById<Button>(R.id.requestbtn)
+        req.setOnClickListener {
+            val intent = Intent(this, Request::class.java)
+            intent.putExtra("user", username.text.toString())
+            startActivity(intent)
+        }
+
 
     }
 }
